@@ -19,7 +19,7 @@ defined('_JEXEC') or die ;
 
 		<?php if($this->params->get('listItemDateCreated')): ?>
 		<!-- Date created -->
-		<span class="itemDateCreated">
+		<span class="itemDateCreated" itemprop="dateCreated">
 			<?php echo JHtml::_('date', $this->item->created, JText::_('K2_DATE_FORMAT_LC2')); ?>
 		</span>
 		<?php endif; ?>
@@ -167,7 +167,7 @@ defined('_JEXEC') or die ;
 
 			<?php if($this->params->get('listItemDateModified') && intval($this->item->modified)!=0): ?>
 			<!-- Item date modified -->
-			<span class="itemDateModified">
+			<span class="itemDateModified" itemprop="dateModified">
 				<?php echo JText::_('K2_LAST_MODIFIED_ON'); ?> <?php echo JHTML::_('date', $this->item->modified, JText::_('K2_DATE_FORMAT_LC2')); ?>
 			</span>
 			<?php endif; ?>
@@ -316,7 +316,7 @@ defined('_JEXEC') or die ;
 				<?php if($this->params->get('listItemRelatedMedia') && count($item->media)): ?>
 				  <div class="itemRelMediaBlock">
 				  	<?php foreach ($item->media as $entry) : ?>
-					<div class="itemRelMedia">
+					<div class="itemRelMedia" itemprop="video">
 						<span class="itemRelMediaOutput"><?php echo $entry->output; ?></span>
 						<div class="clr"></div>
 				  	</div> 

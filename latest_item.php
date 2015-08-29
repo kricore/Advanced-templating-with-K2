@@ -35,7 +35,7 @@ defined('_JEXEC') or die;
   
 	<?php if($this->params->get('latestItemDateCreated')): ?>
 	<!-- Date created -->
-	<span class="latestItemDateCreated">
+	<span class="latestItemDateCreated" itemprop="dateCreated">
 		<?php echo JHtml::_('date', $this->item->created , JText::_('K2_DATE_FORMAT_LC2')); ?>
 	</span>
 	<?php endif; ?>
@@ -121,7 +121,7 @@ defined('_JEXEC') or die;
   	
   	<?php foreach ($this->item->media as $entry) : ?>
 	<div class="itemMedia">
-		<span class="itemMediaOutput"><?php echo $entry->output; ?></span>
+		<div class="itemMediaOutput" itemprop="video"><?php echo $entry->output; ?></div>
 	
 		<?php if(!empty($entry->caption)): ?>
 		<span class="itemMediaCaption"><?php echo $entry->caption; ?></span>
