@@ -16,15 +16,16 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
 ?>
 
 <?php if($this->print): ?>
+
 <!-- Print button at the top of the print page only -->
-<a class="itemPrintThisPage" rel="nofollow" href="#" onclick="window.print();return false;">
+<a class="btn btn--print" rel="nofollow" href="#" onclick="window.print();return false;">
 	<span><?php echo JText::_('K2_PRINT_THIS_PAGE'); ?></span>
 </a>
 <?php endif; ?>
 
 <!-- Start K2 Item Layout -->
 
-<article id="k2Container" class="itemView<?php echo ($this->item->featured) ? ' itemIsFeatured' : ''; ?><?php if ($this->params->get('pageclass_sfx'))echo ' '.$this->params->get('pageclass_sfx');?>" itemscope itemtype="http://schema.org/Article">
+<article id="k2Container" class="item<?php echo ($this->item->featured) ? ' itemIsFeatured' : ''; ?><?php if ($this->params->get('pageclass_sfx'))echo ' '.$this->params->get('pageclass_sfx');?>" itemscope itemtype="http://schema.org/Article">
 	<meta itemprop="inLanguage" content="<?php echo ($this->item->language === '*') ? JFactory::getConfig()->get('language') : $this->item->language; ?>" />
 
 	<!-- K2 Plugins: K2BeforeDisplay -->
@@ -37,18 +38,18 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
 	</h1>
 	<?php endif; ?>
 
-	<header class="itemHeader">
+	<header class="item__header">
 
 		<?php if($this->params->get('itemDateCreated')): ?>
 		<!-- Date created -->
-		<span class="itemDateCreated" itemprop="dateCreated">
+		<span class="item__date item__date--created" itemprop="dateCreated">
 			<?php echo JHtml::_('date', $this->item->created, JText::_('K2_DATE_FORMAT_LC2')); ?>
 		</span>
 		<?php endif; ?>
 
 	  <?php if($this->params->get('itemTitle')): ?>
 	  <!-- Item title -->
-	  <h2 class="itemTitle" itemprop="name">
+	  <h2 class="item__title" itemprop="name">
 
 	  	<span<?php if($this->item->canEdit && !$this->print): ?> data-k2-editable="title" data-k2-item="<?php echo $this->item->id; ?>" <?php endif; ?>><?php echo $this->item->title; ?></span>
 
@@ -66,7 +67,7 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
 
 		<?php if($this->params->get('itemAuthor')): ?>
 		<!-- Item Author -->
-		<span class="itemAuthor" itemprop="author">
+		<span class="item__author" itemprop="author">
 			<?php echo K2HelperUtilities::writtenBy($this->item->author->gender); ?>&nbsp;
 			<?php if(empty($this->item->created_by_alias)): ?>
 			<a rel="author" href="<?php echo $this->item->author->link; ?>"><?php echo $this->item->author->name; ?></a>
@@ -89,11 +90,11 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
   <?php echo $this->item->events->K2AfterDisplayTitle; ?>
   
   <?php if(($this->item->canEdit || $this->params->get('itemPrintButton') || $this->params->get('itemEmailButton')) && !$this->print): ?>
-  <div class="itemToolbar">
+  <div class="item__toolbal">
   	
 	<?php if($this->item->canEdit && !$this->print): ?>
 	<!-- Edit link -->
-	<span class="itemEditLink">
+	<span class="item__edit">
 		<a href="<?php echo $this->item->editLink; ?>">
 			<?php echo JText::_('K2_EDIT_ITEM'); ?>
 		</a>
@@ -102,14 +103,14 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
   		
   	<?php if($this->params->get('itemPrintButton') && !$this->print): ?>
   	<!-- Print Button -->
-	<a class="itemPrintLink" rel="nofollow" href="<?php echo $this->item->printLink; ?>" onclick="window.open(this.href,'printWindow','width=900,height=600,location=no,menubar=no,resizable=yes,scrollbars=yes'); return false;">
+	<a class="item__print" rel="nofollow" href="<?php echo $this->item->printLink; ?>" onclick="window.open(this.href,'printWindow','width=900,height=600,location=no,menubar=no,resizable=yes,scrollbars=yes'); return false;">
 		<span><?php echo JText::_('K2_PRINT'); ?></span>
 	</a>
 	<?php endif; ?>
 	
 	<?php if($this->params->get('itemEmailButton') && !$this->print): ?>
 	<!-- Email Button -->
-	<a class="itemEmailLink" rel="nofollow" href="<?php echo $this->item->emailLink; ?>" onclick="window.open(this.href,'emailWindow','width=400,height=350,location=no,menubar=no,resizable=no,scrollbars=no'); return false;">
+	<a class="item__email" rel="nofollow" href="<?php echo $this->item->emailLink; ?>" onclick="window.open(this.href,'emailWindow','width=400,height=350,location=no,menubar=no,resizable=no,scrollbars=no'); return false;">
 		<span><?php echo JText::_('K2_EMAIL'); ?></span>
 	</a>
 	<?php endif; ?>
@@ -118,7 +119,7 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
   <?php endif; ?>
 
 
-  <div class="itemBody"  itemprop="articleBody">
+  <div class="item__body" itemprop="articleBody">
 
 	  <!-- Plugins: BeforeDisplayContent -->
 	  <?php echo $this->item->events->BeforeDisplayContent; ?>
@@ -129,8 +130,8 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
 	  <?php if($this->params->get('itemImage') && $this->item->image): ?>
 	  		  	
 	  <!-- Item Image -->
-	  <figure class="itemImageBlock">
-		  <span class="itemImage">
+	  <figure class="item__imageblock">
+		  <span class="item__image">
 		  	<a class="k2Modal" href="<?php echo $this->item->images['modal']->src; ?>" title="<?php echo JText::_('K2_CLICK_TO_PREVIEW_IMAGE'); ?>">
 		  		<img src="<?php echo $this->item->image->src; ?>" alt="<?php echo $this->escape($this->item->image->alt); ?>" style="width:<?php echo $this->item->image->width; ?>px; height:auto;" itemprop="image"
 					srcset="<?php echo $this->item->image['xsmall']->src; ?> 320w,
@@ -144,12 +145,12 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
 
 		  <?php if($this->params->get('itemImageMainCaption') && $this->item->image->caption): ?>
 		  <!-- Image caption -->
-		  <figcaption class="itemImageCaption"><?php echo $this->item->image->caption; ?></figcaption>
+		  <figcaption class="item__imagecaption"><?php echo $this->item->image->caption; ?></figcaption>
 		  <?php endif; ?>
 
 		  <?php if($this->params->get('itemImageMainCredits') && $this->item->image->credits): ?>
 		  <!-- Image credits -->
-		  <span class="itemImageCredits"><?php echo $this->item->image->credits; ?></span>
+		  <span class="item__imagecredits"><?php echo $this->item->image->credits; ?></span>
 		  <?php endif; ?>
 
 		  <div class="clr"></div>
@@ -158,25 +159,24 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
 		
 	  <?php if($this->params->get('itemIntroText') && $this->item->introtext): ?>
 	  <!-- Item introtext -->
-	  <div class="itemIntroText"<?php if($this->item->canEdit && !$this->print): ?> data-k2-editable="introtext" data-k2-item="<?php echo $this->item->id; ?>" <?php endif; ?>>
+	  <div class="item__introtext"<?php if($this->item->canEdit && !$this->print): ?> data-k2-editable="introtext" data-k2-item="<?php echo $this->item->id; ?>" <?php endif; ?>>
 	  	<?php echo $this->item->introtext; ?>
 	  </div>
 	  <?php endif; ?>
 	  
 	  <?php if($this->params->get('itemFullText') && $this->item->fulltext): ?>
 	  <!-- Item fulltext -->
-	  <div class="itemFullText"<?php if($this->item->canEdit && !$this->print): ?> data-k2-editable="fulltext" data-k2-item="<?php echo $this->item->id; ?>" <?php endif; ?>>
+	  <div class="item__fulltext"<?php if($this->item->canEdit && !$this->print): ?> data-k2-editable="fulltext" data-k2-item="<?php echo $this->item->id; ?>" <?php endif; ?>>
 	  	<?php echo $this->item->fulltext; ?>
 	  </div>
 	  <?php endif; ?>
 	 
 
 	<div class="clr"></div>
-
 	
 	  <?php if($this->params->get('itemExtraFields') && count($this->item->extraFieldsGroups)): ?>
 	  <!-- Item extra fields -->
-	  <div class="itemExtraFields">
+	  <div class="item__extrafields extrafields">
 	  	<h3><?php echo JText::_('K2_ADDITIONAL_INFO'); ?></h3>
 	  	<?php foreach ($this->item->extraFieldsGroups as $extraFieldGroup): ?>
 	  	<h4><?php echo $extraFieldGroup->name; ?></h4>
@@ -184,8 +184,8 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
 			<?php foreach ($extraFieldGroup->fields as $key=>$extraField): ?>
 			<?php if($extraField->output): ?>
 			<li class="<?php echo ($key%2) ? "odd" : "even"; ?> type<?php echo ucfirst($extraField->type); ?> group<?php echo $extraField->group; ?>">
-				<span class="itemExtraFieldsLabel"><?php echo $extraField->name; ?>:</span>
-				<span class="itemExtraFieldsValue"><?php echo $extraField->output; ?></span>
+				<span class="item__extrafields__label"><?php echo $extraField->name; ?>:</span>
+				<span class="item__extrafields__value"><?php echo $extraField->output; ?></span>
 			</li>
 			<?php endif; ?>
 			<?php endforeach; ?>
@@ -196,24 +196,24 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
 	  <?php endif; ?>
 
 		<?php if($this->params->get('itemHits') || ($this->params->get('itemDateModified') && intval($this->item->modified)!=0)): ?>
-		<div class="itemContentFooter">
+		<footer class="item__contentfooter">
 
 			<?php if($this->params->get('itemHits')): ?>
 			<!-- Item Hits -->
-			<span class="itemHits">
+			<span class="item__hits">
 				<?php echo JText::_('K2_READ'); ?> <b><?php echo $this->item->hits; ?></b> <?php echo JText::_('K2_TIMES'); ?>
 			</span>
 			<?php endif; ?>
 
 			<?php if($this->params->get('itemDateModified') && intval($this->item->modified)!=0): ?>
 			<!-- Item date modified -->
-			<span class="itemDateModified" itemprop="dateModified">
+			<span class="item__date item__date--modified" itemprop="dateModified">
 				<?php echo JText::_('K2_LAST_MODIFIED_ON'); ?> <?php echo JHTML::_('date', $this->item->modified, JText::_('K2_DATE_FORMAT_LC2')); ?>
 			</span>
 			<?php endif; ?>
 
 			<div class="clr"></div>
-		</div>
+		</footer>
 		<?php endif; ?>
 
 	  <!-- Plugins: AfterDisplayContent -->
@@ -227,11 +227,11 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
 
 	<?php if($this->params->get('itemTwitterButton',1) || $this->params->get('itemFacebookButton',1) || $this->params->get('itemGooglePlusOneButton',1)): ?>
 	<!-- Social sharing -->
-	<div class="itemSocialSharing">
+	<div class="item__sharing">
 
 		<?php if($this->params->get('itemTwitterButton',1)): ?>
 		<!-- Twitter Button -->
-		<div class="itemTwitterButton">
+		<div class="item__twitterButton">
 			<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal"<?php if($this->params->get('twitterUsername')): ?> data-via="<?php echo $this->params->get('twitterUsername'); ?>"<?php endif; ?>>
 				<?php echo JText::_('K2_TWEET'); ?>
 			</a>
@@ -241,7 +241,7 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
 
 		<?php if($this->params->get('itemFacebookButton',1)): ?>
 		<!-- Facebook Button -->
-		<div class="itemFacebookButton">
+		<div class="item__facebookButton">
 			<div id="fb-root"></div>
 			<script type="text/javascript">
 				( function(d, s, id) {
@@ -260,7 +260,7 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
 
 		<?php if($this->params->get('itemGooglePlusOneButton',1)): ?>
 		<!-- Google +1 Button -->
-		<div class="itemGooglePlusOneButton">
+		<div class="item__googlePlusOneButton">
 			<g:plusone annotation="inline" width="120"></g:plusone>
 			<script type="text/javascript">
 				(function() {
@@ -284,11 +284,11 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
 	<?php endif; ?>
 
   <?php if($this->params->get('itemCategory') || $this->params->get('itemTags') || $this->params->get('itemAttachments')): ?>
-  <div class="itemLinks">
+  <div class="item__links">
 
 		<?php if($this->params->get('itemCategory')): ?>
 		<!-- Item category -->
-		<div class="itemCategory">
+		<div class="item__category">
 			<span><?php echo JText::_('K2_PUBLISHED_IN'); ?></span>
 			<a href="<?php echo $this->item->category->link; ?>"><?php echo $this->item->category->title; ?></a>
 		</div>
@@ -296,7 +296,7 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
 
 	  <?php if($this->params->get('itemTags') && count($this->item->tags)): ?>
 	  <!-- Item tags -->
-	  <div class="itemTagsBlock">
+	  <div class="item__tags k2__tags">
 		  <span><?php echo JText::_('K2_TAGGED_UNDER'); ?></span>
 		  <ul class="itemTags">
 		    <?php foreach ($this->item->tags as $tag): ?>
@@ -309,9 +309,9 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
 
 	  <?php if($this->params->get('itemAttachments') && count($this->item->attachments)): ?>
 	  <!-- Item attachments -->
-	  <div class="itemAttachmentsBlock">
+	  <div class="item__attachmentsblock">
 		  <span><?php echo JText::_('K2_DOWNLOAD_ATTACHMENTS'); ?></span>
-		  <ul class="itemAttachments">
+		  <ul class="item__attachments">
 		    <?php foreach ($this->item->attachments as $attachment): ?>
 		    <li>
 			    <a title="<?php echo $this->escape($attachment->title); ?>" href="<?php echo $attachment->link; ?>"><?php echo $attachment->name; ?></a>
@@ -330,14 +330,14 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
 
   <?php if($this->params->get('itemAuthorBlock') && empty($this->item->created_by_alias)): ?>
   <!-- Author Block -->
-  <div class="itemAuthorBlock">
+  <div class="item__author__block">
 
   	<?php if($this->params->get('itemAuthorImage') && $this->item->author->image): ?>
-  	<img class="itemAuthorAvatar" src="<?php echo $this->item->author->image->src; ?>" alt="<?php echo $this->item->author->name; ?>" />
+  	<img class="item__author__avatar" src="<?php echo $this->item->author->image->src; ?>" alt="<?php echo $this->item->author->name; ?>" />
   	<?php endif; ?>
 
-    <div class="itemAuthorDetails">
-      <h3 class="itemAuthorName">
+    <div class="item__author__details">
+      <h3 class="item__author__name">
       	<a rel="author" href="<?php echo $this->item->author->link; ?>"><?php echo $this->item->author->name; ?></a>
       </h3>
 
@@ -346,11 +346,11 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
       <?php endif; ?>
 
       <?php if($this->params->get('itemAuthorURL') && !empty($this->item->author->site)): ?>
-      <span class="itemAuthorUrl"><?php echo JText::_('K2_WEBSITE'); ?> <a rel="me" href="<?php echo $this->item->author->site; ?>" target="_blank"><?php echo str_replace('http://', '', $this->item->author->site); ?></a></span>
+      <span class="item__author__url"><?php echo JText::_('K2_WEBSITE'); ?> <a rel="me" href="<?php echo $this->item->author->site; ?>" target="_blank"><?php echo str_replace('http://', '', $this->item->author->site); ?></a></span>
       <?php endif; ?>
 
       <?php if($this->params->get('itemAuthorEmail')): ?>
-      <span class="itemAuthorEmail"><?php echo JText::_('K2_EMAIL'); ?> <?php echo JHTML::_('Email.cloak', $this->item->author->email); ?></span>
+      <span class="item__author__email"><?php echo JText::_('K2_EMAIL'); ?> <?php echo JHTML::_('Email.cloak', $this->item->author->email); ?></span>
       <?php endif; ?>
 
 			<div class="clr"></div>
@@ -365,7 +365,7 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
 
   <?php if($this->params->get('itemAuthorLatest') && count($this->item->author->latest)): ?>
   <!-- Latest items from author -->
-	<div class="itemAuthorLatest">
+	<div class="item__author__latest">
 		<h3><?php echo JText::_('K2_LATEST_FROM'); ?> <?php echo $this->item->author->name; ?></h3>
 		<ul>
 			<?php foreach($this->item->author->latest as $key=>$item): ?>
@@ -380,41 +380,41 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
 	
   <?php if($this->params->get('itemRelated') && count($this->item->related)): ?>
   <!-- Related items by tag -->
-	<div class="itemRelated">
+	<div class="item__related">
 		<h3><?php echo JText::_("K2_RELATED_ITEMS_BY_TAG"); ?></h3>
 		<ul>
 			<?php foreach($this->item->related as $key=>$item): ?>
 			<li class="<?php echo ($key%2) ? "odd" : "even"; ?>">
 
 				<?php if($this->params->get('itemRelatedTitle', 1)): ?>
-				<a class="itemRelTitle" href="<?php echo $item->link ?>"><?php echo $item->title; ?></a>
+				<a class="item__related__title" href="<?php echo $item->link ?>"><?php echo $item->title; ?></a>
 				<?php endif; ?>
 
 				<?php if($this->params->get('itemRelatedCategory')): ?>
-				<div class="itemRelCat"><?php echo JText::_("K2_IN"); ?> <a href="<?php echo $item->category->link ?>"><?php echo $item->category->title; ?></a></div>
+				<div class="item__related__cat"><?php echo JText::_("K2_IN"); ?> <a href="<?php echo $item->category->link ?>"><?php echo $item->category->title; ?></a></div>
 				<?php endif; ?>
 
 				<?php if($this->params->get('itemRelatedAuthor')): ?>
-				<div class="itemRelAuthor"><?php echo JText::_("K2_BY"); ?> <a rel="author" href="<?php echo $item->author->link; ?>"><?php echo $item->author->name; ?></a></div>
+				<div class="item__related__category"><?php echo JText::_("K2_BY"); ?> <a rel="author" href="<?php echo $item->author->link; ?>"><?php echo $item->author->name; ?></a></div>
 				<?php endif; ?>
 
 				<?php if($this->params->get('itemRelatedImageSize') && $item->image): ?>
-				<img style="width:<?php echo $item->image->width; ?>px;height:auto;" class="itemRelImg" src="<?php echo $item->image->src; ?>" alt="<?php echo $item->image->alt; ?>" />
+				<img style="width:<?php echo $item->image->width; ?>px;height:auto;" class="item__related__image" src="<?php echo $item->image->src; ?>" alt="<?php echo $item->image->alt; ?>" />
 				<?php endif; ?>
 
 				<?php if($this->params->get('itemRelatedIntrotext')): ?>
-				<div class="itemRelIntrotext"><?php echo $item->introtext; ?></div>
+				<div class="item__related__introtext"><?php echo $item->introtext; ?></div>
 				<?php endif; ?>
 
 				<?php if($this->params->get('itemRelatedFulltext')): ?>
-				<div class="itemRelFulltext"><?php echo $item->fulltext; ?></div>
+				<div class="item__related__fulltext"><?php echo $item->fulltext; ?></div>
 				<?php endif; ?>
 
 				<?php if($this->params->get('itemRelatedMedia') && count($item->media)): ?>
-				  <div class="itemRelMediaBlock">
+				  <div class="item__related__mediablock">
 				  	<?php foreach ($item->media as $entry) : ?>
-					<div class="itemRelMedia" itemprop="video">
-						<span class="itemRelMediaOutput"><?php echo $entry->output; ?></span>
+					<div class="item__related__media" itemprop="video">
+						<span class="item__related__output"><?php echo $entry->output; ?></span>
 						<div class="clr"></div>
 				  	</div> 
 					<?php endforeach; ?>
@@ -422,9 +422,9 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
 				<?php endif; ?>
 
 				<?php if($this->params->get('itemRelatedImageGallery') && count($item->galleries)): ?>
-					<div class="itemRelImageGalleries">
+					<div class="item__related__galleries">
 				  	<?php foreach ($item->galleries as $gallery): ?>
-				  		<div class="itemRelImageGallery">
+				  		<div class="item__related__gallery">
 				  			<?php echo $gallery->output; ?>
 				  		</div>
 				  	<?php endforeach; ?>
@@ -511,14 +511,15 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
   
   <?php if($this->params->get('itemComments') && $this->params->get('comments') && empty($this->item->events->K2CommentsBlock)): ?>
   <a name="itemCommentsAnchor" id="itemCommentsAnchor"></a>
+
   <div data-widget="k2comments" data-itemid="<?php echo $this->item->id; ?>"></div>
   
 	<script type="text/template" id="k2CommentsTemplate">
-		<div class="itemComments">
+		<div class="item__comments">
 	
 			<!-- Item comments -->
 			<% if(comments.length) { %>
-			<h3 class="itemCommentsCounter" itemprop="commentCount">
+			<h3 class="item__comments__counter" itemprop="commentCount">
 			<span><%= pagination.total %></span> 
 			<% if(pagination.total > 1) { %>
 			<?php echo JText::_('K2_COMMENTS'); ?>
@@ -527,11 +528,11 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
 			<% } %>
 			</h3>
 			
-			<ul class="itemCommentsList">
+			<ul class="item__comments__list">
 				<% _(comments).each(function(comment) { %>
-				<li class="<% if(comment.isAuthorResponse) print('authorResponse'); if(comment.state == 0) print(' unpublishedComment'); %>" itemprop="comment">
+				<li class="<% if(comment.isAuthorResponse) print('authorResponse'); if(comment.state == 0) print(' unpublishedComment'); %> item__comment" itemprop="comment">
 		
-			    	<span class="commentLink">
+			    	<span class="item__comment__link">
 				    	<a href="<?php echo $this->item->link; ?>#comment<%- comment.id %>" name="comment<%- comment.id %>" id="comment<%- comment.id %>">
 				    		<?php echo JText::_('K2_COMMENT_LINK'); ?>
 				    	</a>
@@ -541,9 +542,9 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
 					<img data-image-url="<%= comment.user.image.src %>" alt="<%- comment.user.name %>" width="<?php echo $this->params->get('commenterImgWidth'); ?>" />
 					<% } %>
 		
-					<span class="commentDate"><%- comment.date %></span>
+					<span class="item__comment__date"><%- comment.date %></span>
 		
-				    <span class="commentAuthorName">
+				    <span class="item__comment__author">
 					    <?php echo JText::_('K2_POSTED_BY'); ?>
 					   <% if(comment.user.link) { %>
 					    <a data-user-link="<%= comment.user.link %>" title="<%- comment.user.name %>" target="_blank" rel="nofollow">
@@ -557,7 +558,7 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
 				    <p><%= comment.text %></p>
 				    
 				    <% if(comment.canEdit || comment.canReport) { %>
-					<span class="commentToolbar">
+					<span class="item__comment__toolbar">
 						
 						<% if(comment.canEdit) { %>
 							
@@ -587,19 +588,19 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
 			</ul>
 			
 			<% if(pagination.total > pagination.limit) { %>
-			<div class="itemCommentsPagination" data-role="pagination">
+			<div class="item__comments__pagination" data-role="pagination">
 				<ul>
-					<li><a data-page="1" href="#" class="k2CommentsPaginationStart"><?php echo JText::_('K2_START'); ?></a></li>
+					<li><a data-page="1" href="#" class="item__comments_pstart"><?php echo JText::_('K2_START'); ?></a></li>
 					<% if((pagination.pagesCurrent - 1) > 0) { %>
-					<li><a data-page="previous" href="#" class="k2CommentsPaginationPrevious"><?php echo JText::_('K2_PREVIOUS'); ?></a></li>
+					<li><a data-page="previous" href="#" class="item__comments__pprevious"><?php echo JText::_('K2_PREVIOUS'); ?></a></li>
 					<% } %>
 					<% for(i = pagination.pagesStart; i <= pagination.pagesStop; i++) { %>
 					<li <% if(pagination.pagesCurrent == i) { %> class="active" <% } %>><a data-page="<%= i %>" href="#"><%= i %></a></li>
 					<% } %>
 					<% if((pagination.pagesCurrent + 1) <= pagination.pagesTotal) { %>
-					<li><a data-page="next" href="#" class="k2CommentsPaginationNext"><?php echo JText::_('K2_NEXT'); ?></a></li>
+					<li><a data-page="next" href="#" class="item__comments__pnext"><?php echo JText::_('K2_NEXT'); ?></a></li>
 					<% } %>
-					<li><a data-page="<%= pagination.pagesTotal %>" href="#" class="k2CommentsPaginationEnd"><?php echo JText::_('K2_END'); ?></a></li>
+					<li><a data-page="<%= pagination.pagesTotal %>" href="#" class="item__comments__pend"><?php echo JText::_('K2_END'); ?></a></li>
 				</ul>
 				<div class="clr"></div>
 			</div>
@@ -609,11 +610,11 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
 			
 			<?php if(!$this->print && $this->user->canComment): ?>
 			<!-- Item comments form -->
-			<div class="itemCommentsForm">
+			<div class="item__comments__form">
 				<h3><?php echo JText::_('K2_LEAVE_A_COMMENT') ?></h3>
 
 				<?php if($this->params->get('commentsFormNotes')): ?>
-				<p class="itemCommentsFormNotes">
+				<p class="item__comments__formnotes">
 					<?php if($this->params->get('commentsFormNotesText')): ?>
 					<?php echo nl2br($this->params->get('commentsFormNotesText')); ?>
 					<?php else: ?>

@@ -21,7 +21,7 @@ defined('_JEXEC') or die; ?>
 	
 	<?php if($this->params->get('catFeedIcon')): ?>
 	<!-- RSS feed icon -->
-	<div class="k2FeedIcon">
+	<div class="k2__feed__icon">
 		<a href="<?php echo $this->feedLink; ?>" title="<?php echo JText::_('K2_SUBSCRIBE_TO_THIS_RSS_FEED'); ?>">
 			<span><?php echo JText::_('K2_SUBSCRIBE_TO_THIS_RSS_FEED'); ?></span>
 		</a>
@@ -31,15 +31,15 @@ defined('_JEXEC') or die; ?>
 	
 	<?php if(isset($this->category) || ( $this->params->get('subCategories') && count($this->category->children) )): ?>
 	<!-- Blocks for current category and subcategories -->
-	<div class="itemListCategoriesBlock">
+	<div class="itemlist itemlist__category">
 
 		<?php if(isset($this->category) && ( $this->params->get('catImage') || $this->params->get('catTitle') || $this->params->get('catDescription') || $this->category->events->K2CategoryDisplay )): ?>
 		<!-- Category block -->
-		<header class="itemListCategory">
+		<header class="itemlist__header itemlist__header--cat">
 
 			<?php if($this->category->canAdd): ?>
 			<!-- Item add link -->
-			<span class="catItemAddLink">
+			<span class="add__link itemlist__add__link--cat">
 				<a href="<?php echo $this->category->addLink; ?>">
 					<?php echo JText::_('K2_ADD_A_NEW_ITEM_IN_THIS_CATEGORY'); ?>
 				</a>
@@ -63,7 +63,7 @@ defined('_JEXEC') or die; ?>
 			
 			<?php if($this->params->get('catExtraFields') && count($this->category->extraFieldsGroups)): ?>
 			<!-- Category extra fields -->
-			<div class="catExtraFields">
+			<div class="itemlist__extrafields extrafields--cat extrafields">
 				<h3><?php echo JText::_('K2_ADDITIONAL_INFO'); ?></h3>
 				<?php foreach ($this->category->extraFieldsGroups as $extraFieldGroup): ?>
 				<h4><?php echo $extraFieldGroup->name; ?></h4>
@@ -71,8 +71,8 @@ defined('_JEXEC') or die; ?>
 				<?php foreach ($extraFieldGroup->fields as $key=>$extraField): ?>
 				<?php if($extraField->output): ?>
 					<li class="<?php echo ($key%2) ? "odd" : "even"; ?> type<?php echo ucfirst($extraField->type); ?> group<?php echo $extraField->group; ?>">
-						<span class="catExtraFieldsLabel"><?php echo $extraField->name; ?>:</span>
-						<span class="catExtraFieldsValue"><?php echo $extraField->output; ?></span>
+						<span class="itemlist__extrafields__label"><?php echo $extraField->name; ?>:</span>
+						<span class="itemlist__extrafields__value"><?php echo $extraField->output; ?></span>
 					</li>
 				<?php endif; ?>
 				<?php endforeach; ?>
@@ -149,7 +149,7 @@ defined('_JEXEC') or die; ?>
 	
 	
 	<?php if(count($this->items)): ?>
-	<div class="itemList">
+	<div class="item__list item__list--category">
 		<?php foreach($this->items as $item): ?>
 			<?php $this->item = $item; echo $this->loadItemlistLayout(); ?>
 		<?php endforeach; ?>
@@ -158,7 +158,7 @@ defined('_JEXEC') or die; ?>
 	
 	<?php if($this->pagination->get('pages.total') > 1): ?>
 	<!-- Pagination -->
-	<div class="k2Pagination pagination">
+	<div class="k2__pagination pagination">
 		<?php if($this->params->get('catPagination')) echo $this->pagination->getPagesLinks(); ?>
 		<div class="clr"></div>
 		<?php if($this->params->get('catPaginationResults')) echo $this->pagination->getPagesCounter(); ?>
