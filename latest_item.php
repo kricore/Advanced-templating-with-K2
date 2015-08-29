@@ -68,7 +68,7 @@ defined('_JEXEC') or die;
 
 		<?php if($this->params->get('latestItemIntroText')): ?>
 		<!-- Item introtext -->
-		<div class="latestItemIntroText">
+		<div class="latestItemIntroText" itemprop="description">
 			<?php echo $this->item->introtext; ?>
 		</div>
 		<?php endif; ?>
@@ -101,7 +101,7 @@ defined('_JEXEC') or die;
 		  <span><?php echo JText::_('K2_TAGGED_UNDER'); ?></span>
 		  <ul class="latestItemTags">
 		    <?php foreach ($this->item->tags as $tag): ?>
-		    <li><a href="<?php echo $tag->link; ?>"><?php echo $tag->name; ?></a></li>
+		    <li itemprop="keywords"><a href="<?php echo $tag->link; ?>"><?php echo $tag->name; ?></a></li>
 		    <?php endforeach; ?>
 		  </ul>
 		  <div class="clr"></div>

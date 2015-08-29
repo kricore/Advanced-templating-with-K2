@@ -115,7 +115,7 @@ defined('_JEXEC') or die ;
 	  <?php if(!empty($this->item->fulltext)): ?>
 	  <?php if($this->params->get('listItemIntroText')): ?>
 	  <!-- Item introtext -->
-	  <div class="itemIntroText">
+	  <div class="itemIntroText" itemprop="description">
 	  	<?php echo $this->item->introtext; ?>
 	  </div>
 	  <?php endif; ?>

@@ -26,7 +26,7 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
 
 <article id="k2Container" class="itemView<?php echo ($this->item->featured) ? ' itemIsFeatured' : ''; ?><?php if ($this->params->get('pageclass_sfx'))echo ' '.$this->params->get('pageclass_sfx');?>" itemscope itemtype="http://schema.org/Article">
 	<meta itemprop="inLanguage" content="<?php echo ($this->item->language === '*') ? JFactory::getConfig()->get('language') : $this->item->language; ?>" />
-	
+
 	<!-- K2 Plugins: K2BeforeDisplay -->
 	<?php echo $this->item->events->K2BeforeDisplay; ?>
 	
@@ -300,7 +300,7 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
 		  <span><?php echo JText::_('K2_TAGGED_UNDER'); ?></span>
 		  <ul class="itemTags">
 		    <?php foreach ($this->item->tags as $tag): ?>
-		    <li><a href="<?php echo $tag->link; ?>"><?php echo $tag->name; ?></a></li>
+		    <li itemprop="keywords"><a href="<?php echo $tag->link; ?>"><?php echo $tag->name; ?></a></li>
 		    <?php endforeach; ?>
 		  </ul>
 		  <div class="clr"></div>
