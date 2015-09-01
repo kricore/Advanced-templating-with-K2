@@ -8,6 +8,7 @@ This a part of the K2 V3 project.
 - Microdata
 - Responsive Images with the srcset method and picturefill.js as a fallback
 - BEM Architecture
+- A Cheatsheet with helpful snippets for your project
 
 ### Notes
 The naming used for the image sizes is based on the existing K2 V2 naming. If you are using your own custom sizes you need to update your code and include these new names.
