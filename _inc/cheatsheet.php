@@ -49,7 +49,7 @@ if( isset( $this->item->extraFields->EXTRAFIELDALIASHERE->value ) && ( $this->it
 
 
 
-// Use extrafields as meta data - thank you Joe Campbell 
+// Use extrafields as meta data - thank you @heyjoecampbell 
 $doc = JFactory::getDocument();
 $doc->addCustomTag('<title>'.$this->item->extraFields->title_tag->value.'</title>');
 $doc->addCustomTag('<meta name="description" content="'.$this->item->extraFields->meta_description->value.'" />');
@@ -83,13 +83,21 @@ endif;
 
 
 // Use a default image as a placeholder.
-if(!empty($this->item->image)): ?>
+if($this->item->params->get('itemImage') && !empty($this->item->image)): ?>
 
-	<img src="<?php echo $this->item->image; ?>" alt="<?php if(!empty($this->item->image_caption)) echo K2HelperUtilities::cleanHtml($this->item->image_caption); else echo K2HelperUtilities::cleanHtml($this->item->title); ?>" style="width:<?php echo $this->item->imageWidth; ?>px; height:auto;" />
+	<img src="<?php echo $this->item->extraFields->EXTRAFIELDALIASHERE->value; ?>" alt="<?php if(!empty($this->item->image_caption)) echo K2HelperUtilities::cleanHtml($this->item->image_caption); else echo K2HelperUtilities::cleanHtml($this->item->title); ?>" style="width:<?php echo $this->item->imageWidth; ?>px; height:auto;" />
 
 <?php else: ?>
 
 	<img src="PLACEHOLDER_URL.jpg" alt="<?php echo K2HelperUtilities::cleanHtml($this->item->title); ?>" style="width:<?php echo $this->item->imageWidth; ?>px; height:auto;" />
+
+<?php endif;
+
+
+// Use an extrafield instead of K2's images 
+if( $this->item->params->get('itemImage') && $this->item->extraFields->EXTRAFIELDALIASHERE->value ! == '' ): ?>
+
+	<img src="<?php echo $this->item->image; ?>" alt="<?php if(!empty($this->item->image_caption)) echo K2HelperUtilities::cleanHtml($this->item->image_caption); else echo K2HelperUtilities::cleanHtml($this->item->title); ?>" style="width:<?php echo $this->item->imageWidth; ?>px; height:auto;" />
 
 <?php endif;
 
