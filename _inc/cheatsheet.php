@@ -6,6 +6,13 @@
 //	Happy coding from @fevangelou @lefteriskavadas and @kricore
 // 	A special thanks to all of the community's members
 
+
+//
+//
+// K2 Data layer (introduced in version 3)
+//
+//
+
 // Fetch a single K2 item by ID
 $item = K2Items::getInstance(12);
 
@@ -40,23 +47,11 @@ foreach ( $items->tags as $tag )
 }
 
 
-// Render a specific extrafield
-if( isset( $this->item->extraFields->EXTRAFIELDALIASHERE->value ) && ( $this->item->extraFields->EXTRAFIELDALIASHERE->value ! == '') ) 
-{
-	$this->item->extraFields->EXTRAFIELDALIASHERE->name;
-	$this->item->extraFields->EXTRAFIELDALIASHERE->value;
-}
-
-
-
-// Use extrafields as meta data - thank you @heyjoecampbell 
-$doc = JFactory::getDocument();
-$doc->addCustomTag('<title>'.$this->item->extraFields->title_tag->value.'</title>');
-$doc->addCustomTag('<meta name="description" content="'.$this->item->extraFields->meta_description->value.'" />');
-
-// See also https://gist.github.com/kricore/2c9a5434748c5f5f6cf9
-
-
+//
+//
+// Working on your template
+//
+//
 
 //
 // Excute code (eg: show a module position) inside specific K2 views only
@@ -82,6 +77,22 @@ else:
 endif;
 
 
+// Add a script in your template
+$document = JFactory::getDocument();
+$document->addScript($url);
+
+
+// Add a stylesheet in your template
+$document = JFactory::getDocument();
+$document->addStylesheet($url);
+
+
+//
+//
+// Image Handling
+//
+//
+
 // Use a default image as a placeholder.
 if($this->item->params->get('itemImage') && !empty($this->item->image)): ?>
 
@@ -100,6 +111,41 @@ if( $this->item->params->get('itemImage') && $this->item->extraFields->EXTRAFIEL
 	<img src="<?php echo $this->item->image; ?>" alt="<?php if(!empty($this->item->image_caption)) echo K2HelperUtilities::cleanHtml($this->item->image_caption); else echo K2HelperUtilities::cleanHtml($this->item->title); ?>" style="width:<?php echo $this->item->imageWidth; ?>px; height:auto;" />
 
 <?php endif;
+
+// Use responsive images (srcset) K2 Version 3.
+// You might need to adapt the image names to reflect your setup
+?>
+
+<img src="<?php echo $this->item->image->src; ?>" alt="<?php echo $this->escape($this->item->image->alt); ?>" style="width:<?php echo $this->item->image->width; ?>px; height:auto;" itemprop="image"
+	srcset="<?php echo $this->item->image['xsmall']->src; ?> 320w,
+			<?php echo $this->item->image['small']->src; ?> 400w, 
+			<?php echo $this->item->image['medium']->src; ?> 600w, 
+			<?php echo $this->item->image['large']->src; ?> 768w,
+			<?php echo $this->item->image['large']->src; ?> 2x"
+	/>
+<?php 
+
+//
+//
+// Working with Extrafields
+//
+//
+
+
+// Render a specific extrafield
+if( isset( $this->item->extraFields->EXTRAFIELDALIASHERE->value ) && ( $this->item->extraFields->EXTRAFIELDALIASHERE->value ! == '') ) 
+{
+	$this->item->extraFields->EXTRAFIELDALIASHERE->name;
+	$this->item->extraFields->EXTRAFIELDALIASHERE->value;
+}
+
+
+// Use extrafields as meta data - thank you @heyjoecampbell 
+$doc = JFactory::getDocument();
+$doc->addCustomTag('<title>'.$this->item->extraFields->title_tag->value.'</title>');
+$doc->addCustomTag('<meta name="description" content="'.$this->item->extraFields->meta_description->value.'" />');
+
+// See also https://gist.github.com/kricore/2c9a5434748c5f5f6cf9
 
 
 //
@@ -153,30 +199,4 @@ if($this->item->params->get('itemExtraFields') && count($this->item->extra_field
 </ul>
 </div>
 <?php endif; ?>
-
-<?php 
-// Use responsive images (srcset) K2 Version 3.
-// You might need to adapt the image names to reflect your setup
-?>
-
-<img src="<?php echo $this->item->image->src; ?>" alt="<?php echo $this->escape($this->item->image->alt); ?>" style="width:<?php echo $this->item->image->width; ?>px; height:auto;" itemprop="image"
-	srcset="<?php echo $this->item->image['xsmall']->src; ?> 320w,
-			<?php echo $this->item->image['small']->src; ?> 400w, 
-			<?php echo $this->item->image['medium']->src; ?> 600w, 
-			<?php echo $this->item->image['large']->src; ?> 768w,
-			<?php echo $this->item->image['large']->src; ?> 2x"
-	/>
-
-
-<?php 
-// Add a script in your template
-$document = JFactory::getDocument();
-$document->addScript($url);
-
-
-// Add a stylesheet in your template
-$document = JFactory::getDocument();
-$document->addStylesheet($url);
-
-
 
