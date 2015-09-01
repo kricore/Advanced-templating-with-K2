@@ -1,10 +1,11 @@
 # K2-V3-templates
 ## A good starting point for your overrides
 
-This a part of the K2 V3 project.
-You can get K2 from: getk2.org
-Version 3 (beta) https://github.com/joomlaworks/k2-v3-dev-build
-Development verision (2.7) https://github.com/joomlaworks/k2
+This a contribution to the K2 V3 project.
+You can get K2 from: 
+- getk2.org
+- Version 3 (beta) https://github.com/joomlaworks/k2-v3-dev-build
+- Development verision (2.7) https://github.com/joomlaworks/k2
 
 ### Includes:
 - HTML5 Markup
