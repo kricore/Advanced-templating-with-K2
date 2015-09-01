@@ -146,4 +146,29 @@ if($this->item->params->get('itemExtraFields') && count($this->item->extra_field
 </div>
 <?php endif; ?>
 
+<?php 
+// Use responsive images (srcset) K2 Version 3.
+// You might need to adapt the image names to reflect your setup
+?>
+
+<img src="<?php echo $this->item->image->src; ?>" alt="<?php echo $this->escape($this->item->image->alt); ?>" style="width:<?php echo $this->item->image->width; ?>px; height:auto;" itemprop="image"
+	srcset="<?php echo $this->item->image['xsmall']->src; ?> 320w,
+			<?php echo $this->item->image['small']->src; ?> 400w, 
+			<?php echo $this->item->image['medium']->src; ?> 600w, 
+			<?php echo $this->item->image['large']->src; ?> 768w,
+			<?php echo $this->item->image['large']->src; ?> 2x"
+	/>
+
+
+<?php 
+// Add a script in your template
+$document = JFactory::getDocument();
+$document->addScript($url);
+
+
+// Add a stylesheet in your template
+$document = JFactory::getDocument();
+$document->addStylesheet($url);
+
+
 
