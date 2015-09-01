@@ -6,6 +6,12 @@
 //	Happy coding from @fevangelou @lefteriskavadas and @kricore
 // 	A special thanks to all of the community's members
 
+// Legend:
+// 1: The new Data layer
+// 2: Working on your template's index.php
+// 3: Handling Images
+// 4: Working with Extrafields
+// 5: Working with K2 elements
 
 //
 //
@@ -147,6 +153,13 @@ $doc->addCustomTag('<meta name="description" content="'.$this->item->extraFields
 
 // See also https://gist.github.com/kricore/2c9a5434748c5f5f6cf9
 
+// Cleanup the extrafields content so you can use them as metatags
+$safe 		= array("", "");
+$nonsafe 	= array("'", "\"");
+$custometa  = $this->item->extraFields->NAME->value;
+$safemeta 	= str_replace( $nonsafe, $safe, $custometa);
+echo $safemeta;
+
 
 //
 // Just a normal K2 extrafields loop with the addition of icon fonts for social links instead of simple links.. 
@@ -198,5 +211,30 @@ if($this->item->params->get('itemExtraFields') && count($this->item->extra_field
 	<?php endforeach; ?>
 </ul>
 </div>
-<?php endif; ?>
+<?php endif;
+
+
+//
+//
+// K2 Template checks
+//
+//
+
+// Get all of the item's content (or $item)
+var_dump($this->item);
+
+
+// Check if the item belongs to a certain category, category->id will work as well
+if($this->item->category->name == 'Category Name') 
+{
+	// Do something
+}
+
+
+// Get the item's alias
+echo $this->item->alias;
+
+
+// Display a certain tag based on its position
+echo $this->item->tags[0]->name;
 
