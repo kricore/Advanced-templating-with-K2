@@ -8,9 +8,12 @@ You can get K2 from:
 - Development verision (2.7) https://github.com/joomlaworks/k2
 
 ### Includes:
+- K2's new data layer
 - HTML5 Markup
 - Microdata
 - Responsive Images with the srcset method and picturefill.js as a fallback
+- How to create a new extrafield from scratch
+- Demo map map extrafield
 - BEM Architecture
 - A Cheatsheet with helpful snippets for your project
 
