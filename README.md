@@ -19,3 +19,5 @@ You can get K2 from:
 
 ### Notes
 The naming used for the image sizes is based on the existing K2 V2 naming. If you are using your own custom sizes you need to update your code and include these new names.
+
+Once the code is considered stable to be released as v3.0.0, it will be moved over to the main K2 repo at: https://github.com/joomlaworks/k2
