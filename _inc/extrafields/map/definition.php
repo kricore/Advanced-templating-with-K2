@@ -10,7 +10,11 @@
 // no direct access
 defined('_JEXEC') or die ; 
 
-
-// This extrafield does not have any options, so you won't need define anything here:
+// Some simple params for our maps.
+// Choose between bing or Google Maps
 ?>
 
+<select name="<?php echo $field->get('prefix'); ?>[type]">
+	<option value="gmaps">Google Maps</option>
+	<option value="bing">Bing Maps</option>
+</select>

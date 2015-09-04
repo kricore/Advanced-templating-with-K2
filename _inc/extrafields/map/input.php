@@ -8,7 +8,10 @@
  */
 
 // no direct access
+// The administrator form
+
 defined('_JEXEC') or die ; ?>
+
 <div class="jw--block--field">
 	<input type="text" name="<?php echo $field->get('prefix'); ?>[lat]" value="<?php echo htmlspecialchars($field->get('lat'), ENT_QUOTES, 'UTF-8'); ?>" />
 </div>
