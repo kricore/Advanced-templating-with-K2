@@ -133,11 +133,11 @@ $document->addScript('https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.1/p
 		  <span class="itemImage">
 		  	<a class="k2Modal" href="<?php echo $this->item->images['modal']->src; ?>" title="<?php echo JText::_('K2_CLICK_TO_PREVIEW_IMAGE'); ?>">
 		  		<img src="<?php echo $this->item->image->src; ?>" alt="<?php echo $this->escape($this->item->image->alt); ?>" style="width:<?php echo $this->item->image->width; ?>px; height:auto;" itemprop="image"
-					srcset="<?php echo $this->item->image['xsmall']->src; ?> 320w,
-							<?php echo $this->item->image['small']->src; ?> 400w, 
-							<?php echo $this->item->image['medium']->src; ?> 600w, 
-							<?php echo $this->item->image['large']->src; ?> 768w,
-							<?php echo $this->item->image['large']->src; ?> 2x"
+					srcset="<?php echo $this->item->images['xsmall']->src; ?> 320w,
+							<?php echo $this->item->images['small']->src; ?> 400w, 
+							<?php echo $this->item->images['medium']->src; ?> 600w, 
+							<?php echo $this->item->images['large']->src; ?> 768w,
+							<?php echo $this->item->images['large']->src; ?> 2x"
 		  		/>
 		  	</a>
 		  </span>
