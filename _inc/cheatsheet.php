@@ -75,7 +75,7 @@ if($this->item->params->get('itemImage') && !empty($this->item->image)): ?>
 // Use an extrafield instead of K2's images 
 if( $this->item->params->get('itemImage') && $this->item->extraFields->EXTRAFIELDALIASHERE->value ! == '' ): ?>
 
-	<img src="<?php echo $this->item->image; ?>" alt="<?php if(!empty($this->item->image_caption)) echo K2HelperUtilities::cleanHtml($this->item->image_caption); else echo K2HelperUtilities::cleanHtml($this->item->title); ?>" style="width:<?php echo $this->item->imageWidth; ?>px; height:auto;" />
+	<img src="<?php echo $this->item->extraFields->EXTRAFIELDALIASHERE->value; ?>" alt="<?php if(!empty($this->item->image_caption)) echo K2HelperUtilities::cleanHtml($this->item->image_caption); else echo K2HelperUtilities::cleanHtml($this->item->title); ?>" style="width:<?php echo $this->item->imageWidth; ?>px; height:auto;" />
 
 <?php endif;
 
