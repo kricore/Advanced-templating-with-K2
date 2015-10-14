@@ -23,12 +23,14 @@
 //
 // Excute code (eg: show a module position) inside specific K2 views only
 // avaibable tasks (views) - tag, category, user, search
+// $itemid is the menu item's id.
 $option 		= JRequest::getCmd('option');
 $view 			= JRequest::getCmd('view');
 $layout 		= JRequest::getCmd('layout');
 $page 			= JRequest::getCmd('page');
 $task 			= JRequest::getCmd('task');
 $id 			= JRequest::getInt('id');
+$itemid 		= JRequest::getInt('Itemid');
 
 //
 if($option == 'com_k2' && $view == 'item' ):
