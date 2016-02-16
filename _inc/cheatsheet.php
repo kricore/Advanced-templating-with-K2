@@ -102,7 +102,7 @@ if( $this->item->params->get('itemImage') && $this->item->extraFields->EXTRAFIEL
 
 
 // Render a specific extrafield
-if( isset( $this->item->extraFields->EXTRAFIELDALIASHERE->value ) && ( $this->item->extraFields->EXTRAFIELDALIASHERE->value ! == '') ) 
+if( isset( $this->item->extraFields->EXTRAFIELDALIASHERE->value ) && ( $this->item->extraFields->EXTRAFIELDALIASHERE->value !== '') ) 
 {
 	$this->item->extraFields->EXTRAFIELDALIASHERE->name;
 	$this->item->extraFields->EXTRAFIELDALIASHERE->value;
