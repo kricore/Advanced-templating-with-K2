@@ -109,11 +109,14 @@ if( isset( $this->item->extraFields->EXTRAFIELDALIASHERE->value ) && ( $this->it
 }
 
 
-// Use extrafields as meta data - thank you @heyjoecampbell 
+// Use extrafields as meta data - thank you @heyjoecampbell and @kbrookes
 $doc = JFactory::getDocument();
-$doc->addCustomTag('<title>'.$this->item->extraFields->title_tag->value.'</title>');
-$doc->addCustomTag('<meta name="description" content="'.$this->item->extraFields->meta_description->value.'" />');
-
+if ( isset( $this->item->extraFields->title_tag->value ) && ($this->item->extraFields->title_tag->value !=='') ) {
+	$doc->addCustomTag('<title>'.$this->item->extraFields->title_tag->value.'</title>');
+}
+if ( isset( $this->item->extraFields->meta_description->value ) && ($this->item->extraFields->meta_description->value !=='') ) {
+	$doc->addCustomTag('<meta name="description" content="'.$this->item->extraFields->meta_description->value.'" />');
+}
 // See also https://gist.github.com/kricore/2c9a5434748c5f5f6cf9
 
 // Cleanup the extrafields content so you can use them as metatags
