@@ -65,7 +65,7 @@ $document->addStylesheet($url);
 // Use a default image as a placeholder.
 if($this->item->params->get('itemImage') && !empty($this->item->image)): ?>
 
-	<img src="<?php echo $this->item->extraFields->EXTRAFIELDALIASHERE->value; ?>" alt="<?php if(!empty($this->item->image_caption)) echo K2HelperUtilities::cleanHtml($this->item->image_caption); else echo K2HelperUtilities::cleanHtml($this->item->title); ?>" style="width:<?php echo $this->item->imageWidth; ?>px; height:auto;" />
+	<img src="<?php echo $this->item->image; ?>" alt="<?php if(!empty($this->item->image_caption)) echo K2HelperUtilities::cleanHtml($this->item->image_caption); else echo K2HelperUtilities::cleanHtml($this->item->title); ?>" style="width:<?php echo $this->item->imageWidth; ?>px; height:auto;" />
 
 <?php else: ?>
 
@@ -74,13 +74,25 @@ if($this->item->params->get('itemImage') && !empty($this->item->image)): ?>
 <?php endif;
 
 
-// Use an extrafield instead of K2's images 
-if( $this->item->params->get('itemImage') && $this->item->extraFields->EXTRAFIELDALIASHERE->value ! == '' ): ?>
+// Use an extrafield instead of K2's images - The extrafield is a TEXT one
+if( $this->item->params->get('itemImage') && $this->item->extraFields->EXTRAFIELDALIASHERE->value !== '' ): ?>
 
 	<img src="<?php echo $this->item->extraFields->EXTRAFIELDALIASHERE->value; ?>" alt="<?php if(!empty($this->item->image_caption)) echo K2HelperUtilities::cleanHtml($this->item->image_caption); else echo K2HelperUtilities::cleanHtml($this->item->title); ?>" style="width:<?php echo $this->item->imageWidth; ?>px; height:auto;" />
 
-<?php endif;
+<?php endif; ?>
 
+
+// Use an extrafield instead of K2's images - The extrafield is an IMAGE one
+<?php if( $this->item->params->get('itemImage') && $this->item->extraFields->EXTRAFIELDALIASHERE->value !== '' ):
+	$var = $this->item->extraFields->EXTRAFIELDALIASHERE->value ;     
+	$var = preg_replace('/<img src="/',"",$var); 
+	$var = preg_replace('/"> alt="Image" \>/'," ",$var); ?>
+
+	<img src="<?php echo $var; ?>" alt="<?php if(!empty($this->item->image_caption)) echo K2HelperUtilities::cleanHtml($this->item->image_caption); else echo K2HelperUtilities::cleanHtml($this->item->title); ?>" style="width:<?php echo $this->item->imageWidth; ?>px; height:auto;" />
+
+<?php endif; ?>
+
+<?php
 // Use responsive images (srcset) K2 Version 3.
 // You might need to adapt the image names to reflect your setup
 ?>
