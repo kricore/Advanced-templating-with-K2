@@ -20,10 +20,12 @@
 //
 //
 
+// Use Joomla!'s API in order to know what type of content you are viewing and use it to
+// execute code (eg: show a module position) inside specific K2 views only or,
+// avaibable tasks (views) - tag, category, user, search etc view bellow for other uses
 //
-// Excute code (eg: show a module position) inside specific K2 views only
-// avaibable tasks (views) - tag, category, user, search
 // $itemid is the menu item's id.
+$app			= JFactory::getApplication();
 $option 		= JRequest::getCmd('option');
 $view 			= JRequest::getCmd('view');
 $layout 		= JRequest::getCmd('layout');
@@ -31,7 +33,30 @@ $page 			= JRequest::getCmd('page');
 $task 			= JRequest::getCmd('task');
 $id 			= JRequest::getInt('id');
 $itemid 		= JRequest::getInt('Itemid');
+$tmpl 			= JRequest::getCmd('tmpl');
 
+// Detect the frontpage using Joomla!'s native way
+$menu = $app->getMenu();
+if($menu->getActive() == $menu->getDefault()) $isFrontpage = true; else $isFrontpage = false;
+
+// Use Joomla!'s API in order to build a killer body class like WP does.
+$bodyClass = '';
+if($isFrontpage) 			$bodyClass .= ' is-frontpage';
+if($option) 				$bodyClass .= ' cmt-is-'.ucfirst($option);
+if($view) 				$bodyClass .= ' view-is-'.ucfirst($view);
+if($layout) 				$bodyClass .= ' layout-is-'.ucfirst($layout);
+if($page) 				$bodyClass .= ' page-is-'.ucfirst($page);
+if($task) 				$bodyClass .= ' task-is-'.ucfirst($task);
+if($id) 				$bodyClass .= ' id-is-'.ucfirst($id);
+if($itemid) 				$bodyClass .= ' itemId-is-'.ucfirst($itemid);
+if($tmpl) 				$bodyClass .= ' tmpl-isi'.ucfirst($tmpl);
+if($tmpl=='component') 			$bodyClass .= ' contentpane component wrapper--component';
+if($tmpl=='raw')			$bodyClass .= ' wrapper--raw';
+$bodyClass = trim($bodyClass); ?>
+
+<body class="<?php echo $bodyClass; ?>">
+
+<?php
 //
 if($option == 'com_k2' && $view == 'item' ):
 
