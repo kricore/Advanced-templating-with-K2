@@ -120,6 +120,7 @@ if( $this->item->params->get('itemImage') && $this->item->extraFields->EXTRAFIEL
 <?php
 // Use responsive images (srcset) K2 Version 3.
 // You might need to adapt the image names to reflect your setup
+// Code for v3
 ?>
 
 <img src="<?php echo $this->item->image->src; ?>" alt="<?php echo $this->escape($this->item->image->alt); ?>" style="width:<?php echo $this->item->image->width; ?>px; height:auto;" itemprop="image"
@@ -129,6 +130,32 @@ if( $this->item->params->get('itemImage') && $this->item->extraFields->EXTRAFIEL
 			<?php echo $this->item->image['large']->src; ?> 768w,
 			<?php echo $this->item->image['large']->src; ?> 2x"
 	/>
+	
+<?php 
+//
+// Code for v2.
+//
+?>
+<img src="<?php echo $this->item->image; ?>" alt="<?php if(!empty($this->item->image_caption)) echo K2HelperUtilities::cleanHtml($this->item->image_caption); else echo K2HelperUtilities::cleanHtml($this->item->title); ?>" 
+srcset="<?php echo $this->item->imageXSmall; ?> 320w,
+			<?php echo $this->item->imageSmall; ?> 400w, 
+			<?php echo $this->item->imageMedium; ?> 600w, 
+			<?php echo $this->item->imageLarge; ?> 768w,
+			<?php echo $this->item->imageXLarge; ?> 2x"
+/>
+
+<?php
+//
+// Print a specific Image size
+// 
+?>
+
+<?php echo $this->item->imageXLarge; ?>
+<?php echo $this->item->imageLarge; ?>
+<?php echo $this->item->imageMedium; ?>
+<?php echo $this->item->imageSmall; ?>
+<?php echo $this->item->imageXSmall; ?>
+		
 <?php 
 
 //
